@@ -1,0 +1,41 @@
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+
+            Box(Modifier.fillMaxSize().background(Color(red = 0xDC, green = 0xD0, blue = 0xD0, alpha = 0xFF)).padding(top = 50.dp), Alignment.TopCenter){
+                Row {
+                    Hello()
+                    Image(bitmap = ImageBitmap.imageResource(R.drawable.kitty_sleep), contentDescription = "Котёночек спит", Modifier.padding(top = 350.dp))
+                }
+
+
+
+
+            }
+        }
+    }
+}
+
+@Preview(showSystemUi = true)
+@Composable
+fun Hello (){
+    val myColor: Color = Color(red = 0xDC, green = 0xD0, blue = 0xD0, alpha = 0xFF)
+    val box_1: Color = Color(red = 0x5E, green = 0x5A, blue = 0xAD, alpha = 0xFF)
+    val textInputName1: Color = Color(red = 0x38, green = 0x35, blue = 0x7E, alpha = 0xFF)
+    val name = remember{ mutableStateOf("") }
+    Row () {
+        Box ( modifier = Modifier.background(box_1).size(350.dp, 200.dp).padding(30.dp, 30.dp), contentAlignment = Alignment.Center) {
+            Text(text = "Добрый день, ${name.value}!", fontSize = 28.sp, modifier = Modifier.verticalScroll(
+                rememberScrollState()
+            ), color = Color.Yellow, fontFamily = FontFamily.Monospace, fontWeight = FontWeight.Bold)
+        }
+        Box(Modifier.fillMaxSize().padding(top = 250.dp), Alignment.TopCenter){
+            Text("Введите имя", fontSize = 25.sp, color = textInputName1)
+        }
+        Box(Modifier.fillMaxSize().padding(top = 300.dp), Alignment.TopCenter){
+            TextField(value = name.value, onValueChange = {newText -> name.value = newText})
+        }
+    }
+}
